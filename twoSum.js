@@ -12,6 +12,4 @@ var twoSum = function(nums, target) {
     }
     
 }; 
-
-
 console.log(twoSum([2,1,3,7,11,15],9))
