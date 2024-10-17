@@ -8,19 +8,22 @@
  */
 /**
  * @param {TreeNode} root
- * @return {boolean}
+ * @return {number}
  */
-var isBalanced = function(root) {
-    if(root === null) return true
-    let balanceF = Math.abs(getHeight(root.left)-getHeight(root.right))
-    if(balanceF>1) return false
-    return isBalanced(root.left) && isBalanced(root.right)
-};
 
-// function that gets the height
-var getHeight= function(node){
-    if(node === null) return 0 // base case: when it reaches 
-    let left = getHeight(node.left)
-    let right = getHeight(node.right)
-    return Math.max(left,right)+1
+var diameterOfBinaryTree = function (root) {
+    if (root === null) return 0 // Handle empty tree
+    let max = 0; // keep the max value of the longest path
+
+    function getHeight(node) {
+        if (node === null) return 0 // when it reaches a leaf node
+
+        const leftHeight = getHeight(node.left);
+        const rightHeight = getHeight(node.right);
+        max = Math.max(max, leftHeight + rightHeight); // Update max diameter
+
+        return Math.max(leftHeight, rightHeight) + 1;
+    }
+    getHeight(root);
+    return max;
 }
